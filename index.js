@@ -1,12 +1,14 @@
 const Discord = require('discord.js');
+// const express = require('express');
 
 require('dotenv/config');
 
-console.log('token ', process.env.TOKEN_BOT);
-
 const client = new Discord.Client();
-
 const prefix = '@';
+
+// const app = express();
+
+// app.get('/', (req, res) => res.send('Hello world'));
 
 client.on('message', (message) => {
   // ignore bots messages
@@ -25,3 +27,12 @@ client.on('message', (message) => {
 });
 
 client.login(process.env.TOKEN_BOT);
+// app.listen(process.env.PORT || 3000);
+
+const express = require('express');
+
+const app = express();
+app.get('/', (req, res) => res.json({ token: process.env.TOKEN_BOT }));
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running on port 3000');
+});
